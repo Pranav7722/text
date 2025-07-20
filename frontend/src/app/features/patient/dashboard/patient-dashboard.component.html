@@ -1,0 +1,116 @@
+<mat-toolbar color="primary">
+  <span>🏥 MediCase - Patient Dashboard</span>
+  <span class="spacer"></span>
+  <span *ngIf="currentUser">Welcome, {{ currentUser.firstName }}!</span>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <h1>Welcome to your Medical Vault</h1>
+    <p>Manage your medical documents securely and share them with healthcare providers easily.</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- QR Code Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>📱 Your QR Code</mat-card-title>
+        <mat-card-subtitle>Share with doctors for instant access</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="qr-section">
+          <div class="qr-placeholder">
+            <mat-icon>qr_code</mat-icon>
+            <p>QR Code ID: {{ currentUser?.qrCodeId }}</p>
+          </div>
+          <p class="qr-info">Doctors can scan this QR code to access your shared medical documents.</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="downloadQRCode()">
+          <mat-icon>download</mat-icon>
+          Download QR Code
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Documents Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>📄 Medical Documents</mat-card-title>
+        <mat-card-subtitle>Upload and manage your records</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Total Documents</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Shared Documents</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" routerLink="/patient/documents">
+          <mat-icon>folder</mat-icon>
+          Manage Documents
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Profile Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>👤 Profile Information</mat-card-title>
+        <mat-card-subtitle>Update your medical information</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="profile-info">
+          <p><strong>Name:</strong> {{ currentUser?.firstName }} {{ currentUser?.lastName }}</p>
+          <p><strong>Email:</strong> {{ currentUser?.email }}</p>
+          <p><strong>Blood Group:</strong> {{ currentUser?.bloodGroup || 'Not specified' }}</p>
+          <p><strong>Allergies:</strong> {{ currentUser?.allergies || 'None specified' }}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button routerLink="/patient/profile">
+          <mat-icon>edit</mat-icon>
+          Edit Profile
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Quick Actions Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>⚡ Quick Actions</mat-card-title>
+        <mat-card-subtitle>Common tasks</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="quick-actions">
+          <button mat-stroked-button class="action-button">
+            <mat-icon>upload_file</mat-icon>
+            Upload Document
+          </button>
+          <button mat-stroked-button class="action-button">
+            <mat-icon>share</mat-icon>
+            Share Documents
+          </button>
+          <button mat-stroked-button class="action-button">
+            <mat-icon>history</mat-icon>
+            View History
+          </button>
+          <button mat-stroked-button class="action-button">
+            <mat-icon>download</mat-icon>
+            Download All
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

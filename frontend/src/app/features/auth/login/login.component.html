@@ -1,0 +1,75 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <div class="header-content">
+        <h1>🏥 MediCase</h1>
+        <p>Digital Medical Document Vault</p>
+      </div>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email">
+          <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            {{ getErrorMessage('email') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter your password">
+          <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            {{ getErrorMessage('password') }}
+          </mat-error>
+        </mat-form-field>
+
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          class="full-width login-button"
+          [disabled]="loginForm.invalid || isLoading">
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="!isLoading">Login</span>
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="actions">
+      <p>Don't have an account? 
+        <a routerLink="/auth/register" class="register-link">Register here</a>
+      </p>
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="demo-accounts">
+    <h3>Demo Accounts</h3>
+    <div class="demo-account-grid">
+      <mat-card class="demo-card">
+        <mat-card-content>
+          <h4>👨‍⚕️ Doctor</h4>
+          <p><strong>Email:</strong> doctor@medicase.com</p>
+          <p><strong>Password:</strong> password123</p>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="demo-card">
+        <mat-card-content>
+          <h4>🏥 Patient</h4>
+          <p><strong>Email:</strong> patient@medicase.com</p>
+          <p><strong>Password:</strong> password123</p>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="demo-card">
+        <mat-card-content>
+          <h4>⚙️ Admin</h4>
+          <p><strong>Email:</strong> admin@medicase.com</p>
+          <p><strong>Password:</strong> password123</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
